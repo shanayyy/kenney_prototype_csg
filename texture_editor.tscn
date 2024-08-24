@@ -1,0 +1,86 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhg6cepe6wf3s"]
+
+[ext_resource type="Script" path="res://addons/kenney_prototype_csg/texture_editor.gd" id="1_dympa"]
+
+[node name="TextureEditor" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dympa")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Color"
+
+[node name="ColorsButton" type="OptionButton" parent="GridContainer"]
+unique_name_in_owner = true
+auto_translate_mode = 2
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Texture"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="TexturePickerButton" type="Button" parent="GridContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 108)
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+icon_alignment = 2
+
+[node name="TexturePreview" type="TextureRect" parent="GridContainer/HBoxContainer/TexturePickerButton"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 4
+
+[node name="PopupPanel" type="PopupPanel" parent="GridContainer/HBoxContainer/TexturePickerButton"]
+unique_name_in_owner = true
+size = Vector2i(750, 1000)
+unresizable = false
+min_size = Vector2i(750, 1000)
+
+[node name="Textures" type="ItemList" parent="GridContainer/HBoxContainer/TexturePickerButton/PopupPanel"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 746.0
+offset_bottom = 996.0
+grow_horizontal = 2
+grow_vertical = 2
+max_text_lines = 2
+text_overrun_behavior = 0
+max_columns = 0
+same_column_width = true
+icon_mode = 0
+fixed_icon_size = Vector2i(100, 100)
+
+[connection signal="item_selected" from="GridContainer/ColorsButton" to="." method="_on_colors_button_item_selected"]
+[connection signal="button_down" from="GridContainer/HBoxContainer/TexturePickerButton" to="." method="_on_texture_picker_button_button_down"]
+[connection signal="item_clicked" from="GridContainer/HBoxContainer/TexturePickerButton/PopupPanel/Textures" to="." method="_on_textures_item_clicked"]
